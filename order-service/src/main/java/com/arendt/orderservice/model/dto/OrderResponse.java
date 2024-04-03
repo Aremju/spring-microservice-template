@@ -2,7 +2,6 @@ package com.arendt.orderservice.model.dto;
 
 import com.arendt.orderservice.model.entity.Order;
 import com.arendt.orderservice.model.entity.OrderLineItem;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
