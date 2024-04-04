@@ -19,7 +19,7 @@ import java.util.List;
 @Transactional
 public class OrderService {
     private final OrderRepository orderRepository;
-    private final WebClient webClient;
+    private final WebClient.Builder webClientBuilder;
 
     public void placeOrder(final OrderRequest orderRequest) {
         final var order = Order.from(orderRequest);
@@ -28,8 +28,8 @@ public class OrderService {
                 .map(OrderLineItem::getSkuCode)
                 .toList();
 
-        final var inventoryResponseArray = webClient.get()
-                .uri("http://localhost:8001/api/inventories", uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
+        final var inventoryResponseArray = webClientBuilder.build().get()
+                .uri("http://inventory-service/api/inventories", uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
                 .retrieve()
                 .bodyToMono(InventoryResponse[].class)
                 .block();
