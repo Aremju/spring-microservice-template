@@ -36,3 +36,13 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: admin
       MYSQL_PASSWORD: admin
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:18.0.0
+    container_name: my-keycloak
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    ports:
+      - "8181:8080"
+    command: [ "start-dev" ]
